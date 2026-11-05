@@ -165,4 +165,3 @@ export async function getFinancialReport(period = "all") {
     details
   };
 }
-}

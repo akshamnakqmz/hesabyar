@@ -1,4 +1,4 @@
-const CACHE_NAME = "hesabyar-v3";
+const CACHE_NAME = "hesabyar-v4";
 
 const APP_FILES = [
     "./",
