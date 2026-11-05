@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101019">
+    <link rel="manifest" href="./manifest.json">
+
+    <title>حساب‌یار | مدیریت مالی</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="./js/app.js"></script>
+</head>
+
+<body><!-- Theme Toggle -->
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  type="button"
+  aria-label="تغییر تم"
+>
+  ☀️ تم روشن
+</button>
+
+<div class="app-container">
+
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="brand-icon">ح</div>
+
+            <div>
+                <h1>حساب‌یار</h1>
+                <p>مدیریت هوشمند کسب‌وکار</p>
+            </div>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            آفلاین
+        </div>
+
+    </header>
+
+    <main>
+
+        <section id="welcome" class="welcome">
+
+            <div>
+                <span class="eyebrow">داشبورد مدیریتی</span>
+                <h2>سلام، خوش آمدید</h2>
+                <p>وضعیت مالی کسب‌وکار خود را بررسی کنید.</p>
+            </div>
+
+            <div class="welcome-icon">◈</div>
+
+        </section>
+
+        <section id="dashboard">
+
+            <div class="section-heading">
+                <div>
+                    <h2>خلاصه مالی</h2>
+                    <p>گزارش وضعیت امروز</p>
+                </div>
+
+                <span class="date-label">امروز</span>
+            </div>
+
+            <div class="stats">
+
+                <article class="stat-card sales">
+                    <div class="card-top">
+                        <span>فروش امروز</span>
+                        <span class="card-icon">↗</span>
+                    </div>
+                    <strong id="today-sales">۰</strong>
+                    <small>افغانی</small>
+                </article>
+
+                <article class="stat-card expenses">
+                    <div class="card-top">
+                        <span>مصارف امروز</span>
+                        <span class="card-icon">↘</span>
+                    </div>
+                    <strong id="today-expenses">۰</strong>
+                    <small>افغانی</small>
+                </article>
+
+                <article class="stat-card profit">
+                    <div class="card-top">
+                        <span>سود تخمینی</span>
+                        <span class="card-icon">◆</span>
+                    </div>
+                    <strong id="estimated-profit">۰</strong>
+                    <small>افغانی</small>
+                </article>
+
+                <article class="stat-card debts">
+                    <div class="card-top">
+                        <span>قرض مشتریان</span>
+                        <span class="card-icon">◷</span>
+                    </div>
+                    <strong id="customer-debts">۰</strong>
+                    <small>افغانی</small>
+                </article>
+
+            </div>
+
+        </section>
+
+        <section id="navigation" class="management">
+
+            <div class="section-heading">
+                <div>
+                    <h2>مدیریت کسب‌وکار</h2>
+                    <p>دسترسی سریع به بخش‌های برنامه</p>
+                </div>
+            </div>
+
+            <div class="menu-grid">
+
+                <button class="menu-item" id="open-sales" type="button">
+                    <span class="menu-icon purple">＋</span>
+                    <span>
+                        <strong>ثبت فروش</strong>
+                        <small>ثبت معاملات جدید</small>
+                    </span>
+                    <span class="arrow">←</span>
+                </button>
+
+                <button class="menu-item" id="open-customers" type="button">
+                    <span class="menu-icon blue">♙</span>
+                    <span>
+                        <strong>مشتریان و قرض‌ها</strong>
+                        <small>مدیریت حساب مشتریان</small>
+                    </span>
+                    <span class="arrow">←</span>
+                </button>
+
+                <button class="menu-item" id="open-expenses" type="button">
+                    <span class="menu-icon orange">−</span>
+                    <span>
+                        <strong>ثبت مصارف</strong>
+                        <small>مدیریت هزینه‌ها</small>
+                    </span>
+                    <span class="arrow">←</span>
+                </button>
+
+                <button class="menu-item" id="open-reports" type="button">
+                    <span class="menu-icon green">▤</span>
+                    <span>
+                        <strong>گزارش‌های مالی</strong>
+                        <small>بررسی عملکرد مالی</small>
+                    </span>
+                    <span class="arrow">←</span>
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- SALES -->
+
+        <section id="sales-section" class="sales-section" hidden>
+
+            <div class="section-heading">
+                <div>
+                    <h2>ثبت فروش جدید</h2>
+                    <p>اطلاعات معامله را وارد کنید.</p>
+                </div>
+
+                <button id="close-sales" class="back-button" type="button">
+                    بازگشت
+                </button>
+            </div>
+
+            <form id="sale-form">
+
+                <label for="product-name">نام جنس</label>
+                <input id="product-name" type="text" required maxlength="100" placeholder="مثلاً موبایل">
+
+                <label for="customer-name">نام مشتری</label>
+                <input id="customer-name" type="text" maxlength="100" placeholder="نام مشتری">
+
+                <div class="form-grid">
+
+                    <div>
+                        <label for="quantity">تعداد</label>
+                        <input id="quantity" type="number" min="1" step="1" value="1" required>
+                    </div>
+
+                    <div>
+                        <label for="purchase-price">قیمت خرید هر واحد</label>
+                        <input id="purchase-price" type="number" min="0" step="0.01" required>
+                    </div>
+
+                    <div>
+                        <label for="sale-price">قیمت فروش هر واحد</label>
+                        <input id="sale-price" type="number" min="0.01" step="0.01" required>
+                    </div>
+
+                    <div>
+                        <label for="paid-amount">مبلغ پرداخت‌شده</label>
+                        <input id="paid-amount" type="number" min="0" step="0.01" value="0" required>
+                    </div>
+
+                </div>
+
+                <div class="sale-preview">
+
+                    <div>
+                        <span>مجموع فروش</span>
+                        <strong id="preview-total">۰ افغانی</strong>
+                    </div>
+
+                    <div>
+                        <span>سود ناخالص</span>
+                        <strong id="preview-profit">۰ افغانی</strong>
+                    </div>
+
+                    <div>
+                        <span>قرض باقی‌مانده</span>
+                        <strong id="preview-debt">۰ افغانی</strong>
+                    </div>
+
+                </div>
+
+                <p id="sale-error" class="sale-error" role="alert"></p>
+
+                <button class="submit-button" type="submit">
+                    ثبت معامله
+                </button>
+
+            </form>
+
+            <div class="sales-history">
+                <h2>تاریخچه فروش‌ها</h2>
+                <div id="sales-list"></div>
+            </div>
+
+        </section>
+
+        <!-- EXPENSES -->
+
+        <section id="expenses-section" class="sales-section" hidden>
+
+            <div class="section-heading">
+                <div>
+                    <h2>ثبت مصرف جدید</h2>
+                    <p>مصارف کسب‌وکار خود را ثبت کنید.</p>
+                </div>
+
+                <button id="close-expenses" class="back-button" type="button">
+                    بازگشت
+                </button>
+            </div>
+
+            <form id="expense-form">
+
+                <label for="expense-title">عنوان مصرف</label>
+                <input id="expense-title" type="text" maxlength="100" required placeholder="مثلاً کرایه دکان">
+
+                <label for="expense-category">دسته‌بندی مصرف</label>
+
+                <select id="expense-category" required>
+                    <option value="کرایه">کرایه</option>
+                    <option value="برق و آب">برق و آب</option>
+                    <option value="انتقالات">انتقالات</option>
+                    <option value="معاشات">معاشات</option>
+                    <option value="تعمیرات">تعمیرات</option>
+                    <option value="لوازم و مواد مصرفی">لوازم و مواد مصرفی</option>
+                    <option value="سایر">سایر</option>
+                </select>
+
+                <label for="expense-amount">مبلغ مصرف (افغانی)</label>
+                <input id="expense-amount" type="number" min="0.01" step="0.01" required>
+
+                <label for="expense-date">تاریخ مصرف</label>
+                <input id="expense-date" type="date" required>
+
+                <label for="expense-description">توضیحات (اختیاری)</label>
+                <textarea id="expense-description" maxlength="500" rows="3"></textarea>
+
+                <div class="sale-preview">
+                    <div>
+                        <span>مبلغ مصرف</span>
+                        <strong id="expense-preview">۰ افغانی</strong>
+                    </div>
+                </div>
+
+                <p id="expense-error" class="sale-error" role="alert"></p>
+
+                <button class="submit-button" type="submit">
+                    ثبت مصرف
+                </button>
+
+            </form>
+
+            <div class="sales-history">
+                <h2>تاریخچه مصارف</h2>
+                <div id="expenses-list"></div>
+            </div>
+
+        </section>
+
+        <!-- CUSTOMERS -->
+
+        <section id="customers-section" class="sales-section" hidden>
+
+            <div class="section-heading">
+                <div>
+                    <h2>مشتریان و قرض‌ها</h2>
+                    <p>مدیریت حساب مشتریان</p>
+                </div>
+
+                <button id="close-customers" class="back-button" type="button">
+                    بازگشت
+                </button>
+            </div>
+
+            <form id="customer-form">
+
+                <label for="new-customer-name">نام مشتری جدید</label>
+
+                <input
+                    id="new-customer-name"
+                    type="text"
+                    maxlength="100"
+                    required
+                    placeholder="نام مشتری"
+                >
+
+                <p id="customer-error" class="sale-error" role="alert"></p>
+
+                <button class="submit-button" type="submit">
+                    ثبت مشتری
+                </button>
+
+            </form>
+
+            <div class="sales-history">
+                <h2>فهرست مشتریان</h2>
+                <div id="customers-list"></div>
+            </div>
+
+            <div id="customer-details" hidden>
+
+                <div class="section-heading">
+                    <h2 id="customer-detail-name"></h2>
+
+                    <button id="close-customer-details" class="back-button" type="button">
+                        بازگشت به فهرست
+                    </button>
+                </div>
+
+                <div id="customer-sales-list"></div>
+
+            </div>
+
+        </section>
+
+        <!-- REPORTS -->
+
+        <section id="reports-section" class="sales-section" hidden>
+
+            <div class="section-heading">
+                <div>
+                    <h2>گزارش‌های مالی</h2>
+                    <p>بررسی عملکرد مالی کسب‌وکار</p>
+                </div>
+
+                <button id="close-reports" class="back-button" type="button">
+                    بازگشت
+                </button>
+            </div>
+
+            <label for="report-period">دوره گزارش</label>
+
+            <select id="report-period">
+                <option value="today">امروز</option>
+                <option value="week">هفت روز اخیر</option>
+                <option value="month">ماه جاری</option>
+                <option value="all">تمام مدت</option>
+            </select>
+
+            <div class="sale-preview">
+
+                <div>
+                    <span>مجموع فروش</span>
+                    <strong id="report-sales">۰ افغانی</strong>
+                </div>
+
+                <div>
+                    <span>مجموع مصارف</span>
+                    <strong id="report-expenses">۰ افغانی</strong>
+                </div>
+
+                <div>
+                    <span>سود ناخالص</span>
+                    <strong id="report-gross-profit">۰ افغانی</strong>
+                </div>
+
+                <div>
+                    <span>سود پس از مصارف</span>
+                    <strong id="report-net-profit">۰ افغانی</strong>
+                </div>
+
+                <div>
+                    <span>قرض باقی‌مانده</span>
+                    <strong id="report-debts">۰ افغانی</strong>
+                </div>
+
+            </div>
+
+            <div class="sales-history">
+                <h2>جزئیات گزارش</h2>
+                <div id="report-details"></div>
+            </div>
+            <!-- BACKUP AND RESTORE -->
+
+<div class="sales-history">
+
+    <h2>پشتیبان‌گیری و بازیابی اطلاعات</h2>
+
+    <p>
+        برای محافظت از اطلاعات مالی، نسخه پشتیبان تهیه کنید.
+        هنگام بازیابی، اطلاعات فعلی با اطلاعات نسخه پشتیبان جایگزین می‌شوند.
+    </p>
+
+    <button
+        id="backup-export"
+        class="submit-button"
+        type="button"
+    >
+        تهیه نسخه پشتیبان
+    </button>
+
+    <label for="backup-file">
+        انتخاب فایل پشتیبان برای بازیابی
+    </label>
+
+    <input
+        id="backup-file"
+        type="file"
+        accept=".json,application/json"
+    >
+
+    <button
+        id="backup-import"
+        class="submit-button"
+        type="button"
+        disabled
+    >
+        بازیابی اطلاعات
+    </button>
+
+    <p
+        id="backup-status"
+        role="status"
+        aria-live="polite"
+    ></p>
+
+</div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <span>حساب‌یار</span>
+        <span>مدیریت ساده، حساب‌وکتاب دقیق</span>
+    </footer>
+
+</div>
+
+</body>
+</html>
