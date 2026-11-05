@@ -975,3 +975,4 @@ function initThemeUI() {
     applyTheme(newTheme);
   });
 }
+}
