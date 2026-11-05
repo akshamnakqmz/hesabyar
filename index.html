@@ -10,7 +10,33 @@
     <title>حساب‌یار | مدیریت مالی</title>
 
     <link rel="stylesheet" href="./css/style.css">
-    <script type="module" src="./js/app.js"></script>
+    
+<script>
+(function () {
+  function showError(title, message, source, line) {
+    let box = document.getElementById("hesabyar-debug");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "hesabyar-debug";
+      box.style.cssText = "position:fixed;z-index:999999;top:10px;left:10px;right:10px;padding:16px;background:#300;color:#fff;border:2px solid red;border-radius:10px;direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;font:14px monospace;max-height:60vh;overflow:auto;";
+      document.body.appendChild(box);
+    }
+    box.textContent += title + "\n" + message + "\n" +
+      (source || "") + (line ? ":" + line : "") + "\n\n";
+  }
+
+  window.addEventListener("error", function (e) {
+    showError("JAVASCRIPT ERROR", e.message, e.filename, e.lineno);
+  }, true);
+
+  window.addEventListener("unhandledrejection", function (e) {
+    showError("PROMISE ERROR", String(e.reason));
+  });
+})();
+</script>
+
+<script type="module" src="./js/app.js"></script>
+
 </head>
 
 <body><!-- Theme Toggle -->
